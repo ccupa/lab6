@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include("partials/head.ejs") %>
 </head>
+
 <body>
     <div class="page-wrap">
         <div class="main-card">
@@ -16,14 +17,32 @@
             <% for (let i of rows) { %>
                 <div class="quote-card">
                     <p class="quote-text">"<%= i.quote %>"</p>
-                    <p class="quote-author">- <%= i.firstName %> <%= i.lastName %></p>
+                    <p class="quote-author">- <a href="#" class="authorNames" authorId="<%= i.authorId %>">
+                            <%= i.firstName %>
+                                <%= i.lastName %>
+                        </a></p>
                 </div>
-            <% } %>
 
-            <footer>
-                <%- include("partials/footer.ejs") %>
-            </footer>
+                <!-- Creates modal window -->
+                <dialog id="authorModal">
+                    <div id="authorInfo">
+                        <button id="closeModal">Close</button>
+                        <h1 id="authorName"></h1>
+                        <img id="authorPicture" width="300">
+                    </div>
+                </dialog>
+
+
+
+                <% } %>
+                    <footer>
+                        <%- include("partials/footer.ejs") %>
+                    </footer>
         </div>
     </div>
+
+    <script src="/js/quotes.js"></script>
+
 </body>
+
 </html>

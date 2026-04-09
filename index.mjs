@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import mysql from 'mysql2/promise';
 const app = express();
@@ -10,8 +11,8 @@ app.use(express.urlencoded({extended:true}));
 //setting up database connection pool, replace values in red
 const pool = mysql.createPool({
     host: "k2pdcy98kpcsweia.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    user: "gmhoccg2uue6ds29",
-    password: "vvjakq4zu7siihcs",
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PWD,
     database: "nm2pf20notjcum1m",
     connectionLimit: 10,
     waitForConnections: true
@@ -34,6 +35,17 @@ app.get('/', async (req, res) => {
     
 
    res.render("home.ejs", {authors, categories})
+});
+
+//API to get the author info based on authorID
+app.get('/api/author/:author_Id', async (req, res) => {
+    let authorId = req.params.author_Id;
+    let sql = `SELECT *
+    FROM authors
+    WHERE authorId = ?`;
+
+    const [authorInfo] = await pool.query(sql, [authorId]);
+   res.send(authorInfo); //displays the author info in JSON format
 });
 
 app.get('/searchByLikes', async (req, res) => {
@@ -99,7 +111,7 @@ app.get('/searchByKeyword', async (req, res) => {
     let keyword = req.query.keyword;
 
     try {
-        let sql = `SELECT quote, firstName, lastName
+        let sql = `SELECT authorId, quote, firstName, lastName
             FROM quotes
             NATURAL JOIN authors
             WHERE quote LIKE ?`;
