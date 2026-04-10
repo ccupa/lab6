@@ -17,24 +17,24 @@
             <% for (let i of rows) { %>
                 <div class="quote-card">
                     <p class="quote-text">"<%= i.quote %>"</p>
-                    <p class="quote-author">- <a href="#" class="authorNames" authorId="<%= i.authorId %>">
+                    <p class="quote-author">
+                        - <a href="#" class="authorNames" data-author-id="<%= i.authorId %>">
                             <%= i.firstName %>
                                 <%= i.lastName %>
-                        </a></p>
+                        </a>
+                    </p>
                 </div>
-
-                <!-- Creates modal window -->
-                <dialog id="authorModal">
-                    <div id="authorInfo">
-                        <button id="closeModal">Close</button>
-                        <h1 id="authorName"></h1>
-                        <img id="authorPicture" width="300">
-                    </div>
-                </dialog>
-
-
-
                 <% } %>
+
+                    <div id="authorModal" style="display:none; border:1px solid black; padding:20px; background:white;">
+                        <div id="authorInfo">
+                            <button id="closeModal">Close</button>
+                            <h1 id="authorName"></h1>
+                            <img id="authorPicture" width="300" alt="Author picture">
+                            <div id="authorDetails"></div>
+                        </div>
+                    </div>
+
                     <footer>
                         <%- include("partials/footer.ejs") %>
                     </footer>
@@ -42,7 +42,6 @@
     </div>
 
     <script src="/js/quotes.js"></script>
-
 </body>
 
 </html>

@@ -15,5 +15,14 @@
     "ejs": "^5.0.1",
     "express": "^5.2.1",
     "mysql2": "^3.20.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccupa/lab6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ccupa/lab6/issues"
+  },
+  "homepage": "https://github.com/ccupa/lab6#readme"
 }
